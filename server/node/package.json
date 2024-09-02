@@ -4,6 +4,8 @@
   "description": "simple web server for todo-app",
   "main": "main.js",
   "scripts": {
+    "lint": "npx standard",
+    "lint:fix": "npx standard --fix",
     "test": "jest --detectOpenHandles",
     "start:dev": "node main.js"
   },
