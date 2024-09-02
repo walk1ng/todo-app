@@ -13,6 +13,11 @@ on:
       - "server/node/**"
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash
+    working-directory: server/node
+
 jobs:
   build:
     runs-on: ubuntu-latest
