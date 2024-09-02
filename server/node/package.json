@@ -4,7 +4,7 @@
   "description": "simple web server for todo-app",
   "main": "main.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "dev": "node ./src/main.js"
   },
   "author": "walk1ng (iliwgg@gmail.com)",
