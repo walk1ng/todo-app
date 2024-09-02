@@ -9,3 +9,6 @@ app.listen(port, () => {
 const indexRouter = require('./routes/index');
 
 app.use('/', indexRouter);
+
+
+module.exports = app;
