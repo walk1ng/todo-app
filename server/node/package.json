@@ -4,11 +4,16 @@
   "description": "simple web server for todo-app",
   "main": "main.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
-    "dev": "node ./src/main.js"
+    "test": "jest --detectOpenHandles"
   },
   "author": "walk1ng (iliwgg@gmail.com)",
   "license": "MIT",
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "dependencies": {
     "express": "^4.19.2"
   },
