@@ -6,3 +6,4 @@
 - /todos
   - GET
 ## Unit tests by Jest
+## Lint by Standard
