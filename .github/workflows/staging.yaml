@@ -40,8 +40,6 @@ jobs:
               repo: ${context.repo.repo}\n
               issue_number: ${github.event.inputs.PR_number}\n
             ```
-              
-            ```
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
