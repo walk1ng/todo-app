@@ -2,7 +2,9 @@ name: GitHub Actions Build and Deploy Demo
 on:
   push:
     branches:
-      - master
+      - main
+    paths:
+      - "web/**"
   workflow_dispatch:
 
 defaults:
