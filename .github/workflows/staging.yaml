@@ -35,12 +35,10 @@ jobs:
           result-encoding: string
           script: |
             const output = `
-              <details>
-                <summary>this comment comes from github script</summary>
-                  owner: ${context.repo.owner}\n
-                  repo: ${context.repo.repo}\n
-                  > PR: #${{ github.event.inputs.PR_number }}
-              </details>
+                this comment comes from github script.\n
+                owner: ${context.repo.owner}\n
+                repo: ${context.repo.repo}\n
+                > PR: #${{ github.event.inputs.PR_number }}
             `
             github.rest.issues.createComment({
               owner: context.repo.owner,
