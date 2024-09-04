@@ -34,9 +34,17 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           result-encoding: string
           script: |
+            const output = ```
+              this comment comes from github script.\n
+              owner: ${context.repo.owner}\n
+              repo: ${context.repo.repo}\n
+              issue_number: ${github.event.inputs.PR_number}\n
+            ```
+              
+            ```
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: ${{ github.event.inputs.PR_number }},
-              body: 'this comment comes from github script.'
+              body: output
             });
