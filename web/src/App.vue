@@ -57,7 +57,7 @@ function handleOK(msg) {
 
 <template>
   <div class="todo-app">
-    <div class="title">Todo App</div>
+    <div class="title">Todo App Plus</div>
     <div class="todo-form">
       <input
         v-model="value"
