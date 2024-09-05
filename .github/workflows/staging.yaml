@@ -47,11 +47,12 @@ jobs:
               }
             } catch (error) {
               console.log("Error: " + error);
+              throw error;
             }
 
-      - name: Use github script
+      - name: Friendly comment
         uses: actions/github-script@v5
-        id: hello_github_script
+        id: do_a_comment
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           result-encoding: string
