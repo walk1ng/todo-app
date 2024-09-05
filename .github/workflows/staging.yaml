@@ -24,30 +24,21 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           result-encoding: string
           script: |
+            // call the api
+            const response = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ github.event.inputs.PR_number }}
+            });
 
-            try {
-              // call the api
-              const response = await github.rest.pulls.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: ${{ github.event.inputs.PR_number }}
-              });
-
-              // check if the PR is valid and open
-              if (response.status !== 200) {
-                console.log('this is a http code ranther than 200');
-                throw new Error(`Failed to get PR ${{ github.event.inputs.PR_number }}.`);
-              } else if (response.data.state !== "open") {
-                throw new Error(`PR ${{ github.event.inputs.PR_number }} is not open.`);
-              } else if (response.data.number !== ${{ github.event.inputs.PR_number }}) {
-                throw new Error(`PR ${{ github.event.inputs.PR_number }} is not valid.`);
-              } else {
-                console.log("PR ref: " + response.data.head.ref);
-                return response.data.head.ref;
-              }
-            } catch (error) {
-              console.log("Error: " + error);
-              throw error;
+            // check if the PR is valid and open
+            if (response.data.state !== "open") {
+              throw new Error(`PR ${{ github.event.inputs.PR_number }} is not open.`);
+            } else if (response.data.number !== ${{ github.event.inputs.PR_number }}) {
+              throw new Error(`PR ${{ github.event.inputs.PR_number }} is not valid.`);
+            } else {
+              console.log("PR ref: " + response.data.head.ref);
+              return response.data.head.ref;
             }
 
       - name: Friendly comment
