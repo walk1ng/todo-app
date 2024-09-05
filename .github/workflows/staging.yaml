@@ -14,18 +14,33 @@ defaults:
 
 jobs:
   create:
+    name: "Create staging and deploy"
     runs-on: ubuntu-latest
     steps:
-      #   - name: Checkout code
-      #     uses: actions/checkout@v2
+      - name: Verify the PR number
+        uses: actions/github-script@v5
+        id: verify_pr_number
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          result-encoding: string
+          script: |
+            const response = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ github.event.inputs.PR_number }}
+            });
 
-      #   - name: Set up Node.js
-      #     uses: actions/setup-node@v2
-      #     with:
-      #       node-version: 21
-
-      #   - name: Install dependencies
-      #     run: npm ci
+            // check if the PR is valid and open
+            if (response.status !== 200) {
+              throw new Error(`Failed to get PR ${{ github.event.inputs.PR_number }}.`);
+            } else if (response.data.state !== "open") {
+              throw new Error(`PR ${{ github.event.inputs.PR_number }} is not open.`);
+            } else if (response.data.number !== ${{ github.event.inputs.PR_number }}) {
+              throw new Error(`PR ${{ github.event.inputs.PR_number }} is not valid.`);
+            } else {
+              console.log("PR ref: " + response.data.head.ref);
+              return response.data.head.ref;
+            }
 
       - name: Use github script
         uses: actions/github-script@v5
