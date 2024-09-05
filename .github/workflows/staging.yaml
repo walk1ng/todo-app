@@ -31,13 +31,14 @@ jobs:
               pull_number: ${{ github.event.inputs.PR_number }}
             });
 
-            // check if the PR is valid and open
+            // check if the PR is opened should be enough there
+            // if the number invalid, the api will response with 404 and throw
+            // an unhandled http error, the process always to be failed.
+
             if (response.data.state !== "open") {
-              throw new Error(`PR ${{ github.event.inputs.PR_number }} is not open.`);
-            } else if (response.data.number !== ${{ github.event.inputs.PR_number }}) {
-              throw new Error(`PR ${{ github.event.inputs.PR_number }} is not valid.`);
+              throw new Error(`>> PR ${{ github.event.inputs.PR_number }} is not open.`);
             } else {
-              console.log("PR ref: " + response.data.head.ref);
+              console.log(">> PR ref: " + response.data.head.ref);
               return response.data.head.ref;
             }
 
