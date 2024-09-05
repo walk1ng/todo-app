@@ -31,7 +31,7 @@ jobs:
             });
 
             // check if the PR is valid and open
-            if (response.status !== 200) {
+            if (response.data.status !== 200) {
               console.log('this is a http code ranther than 200');
               throw new Error(`Failed to get PR ${{ github.event.inputs.PR_number }}.`);
             } else if (response.data.state !== "open") {
