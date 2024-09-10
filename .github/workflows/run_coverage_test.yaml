@@ -58,3 +58,16 @@ jobs:
         with:
           name: coverage-report
           path: py/coverage.xml
+
+      - name: Get coverage percentage
+        id: coverage
+        run: |
+          COVERAGE=$(coverage report | tail -n 1 | awk '{print $4}' | sed 's/%//')
+          echo "coverage=$COVERAGE" >> $GITHUB_ENV
+
+      - name: Comment on Pull Request with coverage
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: Test Coverage Report
+          message: |
+            The current test coverage is **${{ env.coverage }}%**.
