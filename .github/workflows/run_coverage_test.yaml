@@ -56,7 +56,7 @@ jobs:
         id: cov_report
         run: |
           COV_REPORT_CONTENT=$(coverage report -m)
-          echo "COV_REPORT_CONTENT=$COV_REPORT_CONTENT" >> $GITHUB_ENV
+          echo "coverage_report=$COV_REPORT_CONTENT" >> $GITHUB_ENV
 
       - name: Generate Coverage xml Report
         run: |
@@ -89,4 +89,4 @@ jobs:
           number: ${{ github.event.inputs.PR_number }}
           message: |
             #### Coverage Report Details
-            ${{ env.COV_REPORT_CONTENT }}
+            ${{ env.coverage_report }}
