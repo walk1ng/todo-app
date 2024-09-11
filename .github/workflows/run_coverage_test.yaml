@@ -49,8 +49,12 @@ jobs:
           coverage run -m pytest  -v -s
 
       - name: Generate Coverage Report
+        id: cov_report
         run: |
           coverage report -m
+
+      - name: Generate Coverage xml Report
+        run: |
           coverage xml
 
       - name: Upload coverage.xml as artifact
@@ -71,3 +75,11 @@ jobs:
           header: Test Coverage Report
           message: |
             The current test coverage is **${{ env.coverage }}%**.
+
+      - name: Comment on Pull Request with report details
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          # header: Test Coverage Report
+          message: |
+            #### Coverage Report Details
+            ${{ steps.cov_report.outputs.stdout }}
