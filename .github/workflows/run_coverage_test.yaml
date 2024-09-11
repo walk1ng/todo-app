@@ -91,6 +91,6 @@ jobs:
       - name: Comment on Pull Request with report details
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          header: Test Coverage Report
+          # header: Test Coverage Report
           number: ${{ github.event.inputs.PR_number }}
           path: report.txt
