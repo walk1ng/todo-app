@@ -57,6 +57,7 @@ jobs:
         run: |
           echo "report=today is a good day" >> $GITHUB_ENV
           echo "other=tomorrow is also a good day" >> $GITHUB_OUTPUT
+          echo "content=$(coverage report)" >> $GITHUB_OUTPUT
 
       - name: Generate Coverage xml Report
         run: |
