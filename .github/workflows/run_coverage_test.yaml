@@ -55,11 +55,8 @@ jobs:
       - name: Generate Coverage Report
         id: cov_report
         run: |
-          coverage report -m | tee coverage_report.txt
-          echo '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-          cat coverage_report.txt
-          echo '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-          echo "::set-output name=stdout::$(cat coverage_report.txt)"
+          COV_REPORT_CONTENT=$(coverage report -m)
+          echo "COV_REPORT_CONTENT=$COV_REPORT_CONTENT" >> $GITHUB_ENV
 
       - name: Generate Coverage xml Report
         run: |
@@ -92,4 +89,4 @@ jobs:
           number: ${{ github.event.inputs.PR_number }}
           message: |
             #### Coverage Report Details
-            ${{ steps.cov_report.outputs.stdout }}
+            ${{ env.COV_REPORT_CONTENT }}
