@@ -56,9 +56,13 @@ jobs:
         id: cov_report
         run: |
           coverage report -m | tee report.txt
+          DETAILS=$(cat report.txt)
+          echo '<-------------------------------------->'
+          echo $DETAILS
+          echo '<-------------------------------------->'
           echo "report=today is a good day" >> $GITHUB_ENV
           echo "other=tomorrow is also a good day" >> $GITHUB_OUTPUT
-          echo "content=$(cat report.txt)" >> $GITHUB_OUTPUT
+          echo "content=$DETAILS" >> $GITHUB_OUTPUT
 
       - name: Generate Coverage xml Report
         run: |

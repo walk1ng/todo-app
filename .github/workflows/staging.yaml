@@ -42,6 +42,11 @@ jobs:
               return response.data.head.ref;
             }
 
+      - name: Checkout repo and infra branch
+        uses: actions/checkout@v3
+        with:
+          ref: infra
+
       - name: Friendly comment
         uses: actions/github-script@v5
         id: do_a_comment
