@@ -62,7 +62,7 @@ jobs:
           echo '<-------------------------------------->'
           echo "report=today is a good day" >> $GITHUB_ENV
           echo "other=tomorrow is also a good day" >> $GITHUB_OUTPUT
-          echo "content=$DETAILS" >> $GITHUB_OUTPUT
+          # echo "content=$DETAILS" >> $GITHUB_OUTPUT
 
       - name: Generate Coverage xml Report
         run: |
@@ -91,9 +91,6 @@ jobs:
       - name: Comment on Pull Request with report details
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          # header: Test Coverage Report
+          header: Test Coverage Report
           number: ${{ github.event.inputs.PR_number }}
-          message: |
-            #### Coverage Report Details
-            ${{ env.report }}
-            ${{ steps.cov_report.outputs.other }}
+          path: report.txt
