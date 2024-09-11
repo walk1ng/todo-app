@@ -56,6 +56,7 @@ jobs:
         id: cov_report
         run: |
           echo "report=today is a good day" >> $GITHUB_ENV
+          echo "other=tomorrow is also a good day" >> $GITHUB_OUTPUT
 
       - name: Generate Coverage xml Report
         run: |
@@ -89,3 +90,4 @@ jobs:
           message: |
             #### Coverage Report Details
             ${{ env.report }}
+            ${{ steps.cov_report.outputs.other }}
