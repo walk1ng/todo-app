@@ -55,8 +55,7 @@ jobs:
       - name: Generate Coverage Report
         id: cov_report
         run: |
-          REPORT=$(coverage report)
-          echo "report=$REPORT" >> $GITHUB_ENV
+          echo "report=today is a good day" >> $GITHUB_ENV
 
       - name: Generate Coverage xml Report
         run: |
