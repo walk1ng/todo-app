@@ -12,6 +12,10 @@ on:
     paths:
       - "py/**"
   workflow_dispatch:
+    inputs:
+      PR_number:
+        description: "The PR number"
+        required: true
 
 defaults:
   run:
