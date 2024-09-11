@@ -76,6 +76,7 @@ jobs:
       - name: Comment on Pull Request with coverage
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          number: ${{ github.event.inputs.PR_number }}
           header: Test Coverage Report
           message: |
             The current test coverage is **${{ env.coverage }}%**.
@@ -84,6 +85,7 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           # header: Test Coverage Report
+          number: ${{ github.event.inputs.PR_number }}
           message: |
             #### Coverage Report Details
             ${{ steps.cov_report.outputs.stdout }}
