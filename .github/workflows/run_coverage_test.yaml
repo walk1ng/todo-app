@@ -55,7 +55,8 @@ jobs:
       - name: Generate Coverage Report
         id: cov_report
         run: |
-          coverage report -m
+          coverage report -m | tee coverage_report.txt
+          echo "::set-output name=stdout::$(cat coverage_report.txt)"
 
       - name: Generate Coverage xml Report
         run: |
